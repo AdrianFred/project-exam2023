@@ -85,7 +85,7 @@ const VenueDetails = ({ venue, bookings }) => {
         </div>
         <div className="mx-auto w-[80%]">
           <h1 className="text-2xl font-bold mb-4">{venue.name}</h1>
-          <p className="text-gray-600 break-words max-w-[50%]">{venue.description}</p>
+          <p className="text-gray-600 break-words max-w-[95%]">{venue.description}</p>
           <div className="flex items-center mt-2">
             {venue.rating > 0 ? (
               <>
