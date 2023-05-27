@@ -25,7 +25,7 @@ export default function MediaGallery({ media }) {
   };
 
   return (
-    <div className="max-w-[800px] max-h-[600px] h-full w-full mx-auto px-4 relative group z-1">
+    <div className="max-w-[800px] max-h-[600px] h-full w-full mx-auto relative group z-10">
       <div style={{ backgroundImage: `url(${media[imageIndex]})` }} className="w-full h-full rounded-2xl bg-center bg-cover duration-500"></div>
       <div className="hidden absolute group-hover:block top-[50%] -translate-x-0 translate-y-[50%] right-5 text2xl rounded-full p-2 bg-black/50 text-white cursor-pointer">
         <BsChevronCompactRight onClick={nextImage} size={30} />

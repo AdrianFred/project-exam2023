@@ -79,8 +79,8 @@ const VenueDetails = ({ venue, bookings }) => {
 
   return (
     <div className="flex justify-around items-center mt-8 mb-24 w-[400px]">
-      <div className="bg-white rounded shadow min-w-[800px]">
-        <div className="h-[300px] w-[80%] mx-auto py-12 sm:h-[350px] md:h-[400px] lg:h-[500px] 2xl:w-[90%] 2xl:h-[600px]">
+      <div className="bg-white rounded shadow w-[95%] sm:min-w-[500px] md:min-w-[800px]">
+        <div className="h-[300px] w-[80%] mx-auto py-12 sm:h-[350px] md:h-[500px] 2xl:w-[90%] 2xl:h-[600px]">
           <MediaGallery media={venue.media} />
         </div>
         <div className="mx-auto w-[80%]">
@@ -109,7 +109,7 @@ const VenueDetails = ({ venue, bookings }) => {
 
           <div className="mb-4">
             <p className="text-gray-600">Select Dates:</p>
-            <div className="flex">
+            <div className="grid md:flex">
               <div className="mr-2">
                 <p className="text-gray-600">Check-in:</p>
                 <DatePicker
@@ -122,7 +122,7 @@ const VenueDetails = ({ venue, bookings }) => {
                   filterDate={isDateAvailable}
                   dateFormat="yyyy-MM-dd"
                   isClearable
-                  className="border-2 border-grey-500 rounded"
+                  className="border-2 border-black rounded ml-2"
                 />
               </div>
               <div>
@@ -137,7 +137,7 @@ const VenueDetails = ({ venue, bookings }) => {
                   filterDate={isDateAvailable}
                   dateFormat="yyyy-MM-dd"
                   isClearable
-                  className="border-2 border-grey-500 rounded"
+                  className="border-2 border-black rounded ml-2"
                 />
               </div>
             </div>
