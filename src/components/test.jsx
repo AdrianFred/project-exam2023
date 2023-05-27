@@ -40,7 +40,7 @@ const VenueDetails = ({ venue, bookings }) => {
     }
   };
 
-  async function handleBookClick() {
+  const handleBookClick = async () => {
     // Make API call to book the selected dates
     if (startDate && endDate) {
       const res = await fetch("https://api.noroff.dev/api/v1/holidaze/bookings", {
@@ -65,7 +65,7 @@ const VenueDetails = ({ venue, bookings }) => {
         toast.error(data.status);
       }
     }
-  }
+  };
 
   const calculateNumberOfDays = (start, end) => {
     const oneDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
@@ -163,6 +163,18 @@ const VenueDetails = ({ venue, bookings }) => {
               )}
             </div>
             <div className="mt-4">
+              {startDate && endDate && (
+                <div className="flex justify-between">
+                  <div>
+                    <p className="text-gray-600">Number of Days:</p>
+                    <p>{calculateNumberOfDays(startDate, endDate)}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-600">Total Price:</p>
+                    <p>${calculateTotalPrice(startDate, endDate)}</p>
+                  </div>
+                </div>
+              )}
               <button
                 onClick={handleBookClick}
                 className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"

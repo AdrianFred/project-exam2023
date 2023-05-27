@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const AuctionCard = (props) => {
+const Cards = (props) => {
   return (
     <>
       <div key={props.venue.id} className="flex shadow-2xl  rounded-tr-3xl rounded-bl-3xl bg-white p-4 w-[300px] mt-4 mx-auto ">
@@ -21,7 +21,9 @@ const AuctionCard = (props) => {
           )}
 
           <div className="pt-5 flex justify-between">
-            <div className="text-lg font-semibold">Price: {props.venue.price}</div>
+            <div className="text-lg font-semibold break-words max-w-[125px] overflow-hidden overflow-ellipsis whitespace-nowrap">
+              Price: {props.venue.price}
+            </div>
             <Link href={`/venue/${props.venue.id}`}>
               <button className="p-2 pl-5 pr-5 transition-colors duration-700 transform bg-blue-500 hover:bg-indigo-700 text-gray-100 text-lg rounded-lg focus:border-4 border-indigo-300">
                 View Venue
@@ -34,4 +36,4 @@ const AuctionCard = (props) => {
   );
 };
 
-export default AuctionCard;
+export default Cards;

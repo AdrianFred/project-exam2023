@@ -1,4 +1,4 @@
-import AuctionCard from "@/components/Cards";
+import Cards from "@/components/Cards";
 import { FaHotel } from "react-icons/fa";
 import { useState } from "react";
 import { filterResults } from "@/components/tools/SearchFilter";
@@ -17,6 +17,9 @@ export default function Home({ results }) {
   const [search, setSearch] = useState(filterResults("", { results }));
   const [currentPage, setCurrentPage] = useState(1);
   const venuesPerPage = 20;
+  const indexOfLastVenue = currentPage * venuesPerPage;
+  const indexOfFirstVenue = indexOfLastVenue - venuesPerPage;
+  const currentVenues = search.slice(indexOfFirstVenue, indexOfLastVenue);
 
   const searchInput = (e) => {
     const search = e.target.value;
@@ -24,10 +27,6 @@ export default function Home({ results }) {
     setSearch(filteredResults);
     setCurrentPage(1);
   };
-
-  const indexOfLastVenue = currentPage * venuesPerPage;
-  const indexOfFirstVenue = indexOfLastVenue - venuesPerPage;
-  const currentVenues = search.slice(indexOfFirstVenue, indexOfLastVenue);
 
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -53,7 +52,7 @@ export default function Home({ results }) {
         <h2 className="text-2xl font-bold">Our Venues</h2>
       </div>
       <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:max-w-3xl lg:grid-cols-3 lg:max-w-6xl xl:grid-cols-4 xl:max-w-[1450px] mx-auto">
-        {currentVenues.length > 0 ? currentVenues.map((venue) => <AuctionCard venue={venue} key={venue.id} />) : <p>No venues available.</p>}
+        {currentVenues.length > 0 ? currentVenues.map((venue) => <Cards venue={venue} key={venue.id} />) : <p>No venues available.</p>}
       </div>
       {search.length > venuesPerPage && (
         <div className="flex justify-center mt-4">
@@ -67,15 +66,13 @@ export default function Home({ results }) {
           <p className="text-gray-600 mx-2">
             Page {currentPage} of {Math.ceil(search.length / venuesPerPage)}
           </p>
-          {currentVenues.length === venuesPerPage && (
-            <button
-              onClick={nextPage}
-              className={`bg-blue-500 text-white py-2 px-4 rounded ${isLastPage ? "opacity-50 cursor-not-allowed" : ""}`}
-              disabled={isLastPage}
-            >
-              Next
-            </button>
-          )}
+          <button
+            onClick={nextPage}
+            className={`bg-blue-500 text-white py-2 px-4 rounded ${isLastPage ? "opacity-50 cursor-not-allowed" : ""}`}
+            disabled={isLastPage}
+          >
+            Next
+          </button>
         </div>
       )}
     </div>

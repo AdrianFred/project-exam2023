@@ -78,103 +78,117 @@ const VenueDetails = ({ venue, bookings }) => {
   };
 
   return (
-    <div className="flex justify-around items-center my-4">
-      <div className="p-4 bg-white rounded shadow">
-        <h1 className="text-2xl font-bold mb-4">{venue.name}</h1>
-        <p className="text-gray-600">{venue.description}</p>
-        <div className="flex items-center mt-2">
-          {Array.from({ length: Math.round(venue.rating) }, (_, index) => (
-            <FaStar key={index} className="text-yellow-500 mr-1" />
-          ))}
-          <span className="text-gray-600">{venue.rating.toFixed(1)}</span>
+    <div className="flex justify-around items-center mt-8 mb-24 w-[400px]">
+      <div className="bg-white rounded shadow min-w-[800px]">
+        <div className="h-[300px] w-[80%] mx-auto py-12 sm:h-[350px] md:h-[400px] lg:h-[500px] 2xl:w-[90%] 2xl:h-[600px]">
+          <MediaGallery media={venue.media} />
         </div>
-        <div className="mb-4">
-          <p className="text-gray-600">Price: ${venue.price}</p>
-          <p className="text-gray-600">Last Updated: {venue.updated}</p>
-        </div>
-        <div className="mb-4">
-          <p className="text-gray-600">Select Dates:</p>
-          <div className="flex">
-            <div className="mr-2">
-              <p className="text-gray-600">Check-in:</p>
-              <DatePicker
-                selected={startDate}
-                onChange={handleStartDateChange}
-                selectsStart
-                startDate={startDate}
-                endDate={endDate}
-                minDate={new Date()}
-                filterDate={isDateAvailable}
-                dateFormat="yyyy-MM-dd"
-                isClearable
-                className="border-2 border-grey-500 rounded"
-              />
-            </div>
-            <div>
-              <p className="text-gray-600">Check-out:</p>
-              <DatePicker
-                selected={endDate}
-                onChange={handleEndDateChange}
-                selectsEnd
-                startDate={startDate}
-                endDate={endDate}
-                minDate={startDate}
-                filterDate={isDateAvailable}
-                dateFormat="yyyy-MM-dd"
-                isClearable
-                className="border-2 border-grey-500 rounded"
-              />
-            </div>
-          </div>
-          {startDate && endDate && !isDateAvailable(startDate) && !isDateAvailable(endDate) && (
-            <p className="text-red-500">The selected dates are not available.</p>
-          )}
-
-          <div className="mt-4">
-            <label className="text-gray-600">Guests:</label>
-            <input type="number" value={guests} min={1} onChange={handleGuestsChange} className="border-2 border-gray-500 rounded px-2 py-1 ml-2" />
+        <div className="mx-auto w-[80%]">
+          <h1 className="text-2xl font-bold mb-4">{venue.name}</h1>
+          <p className="text-gray-600 break-words max-w-[50%]">{venue.description}</p>
+          <div className="flex items-center mt-2">
+            {venue.rating > 0 ? (
+              <>
+                {Array.from({ length: Math.round(venue.rating) }, (_, index) => (
+                  <FaStar key={index} className="text-yellow-500 mr-1" />
+                ))}
+                <span className="text-gray-600">({venue.rating.toFixed(1)})</span>
+              </>
+            ) : (
+              <span className="text-gray-600">Rating: ({venue.rating.toFixed(1)})</span>
+            )}
           </div>
 
-          {startDate && endDate && isDateAvailable(startDate) && isDateAvailable(endDate) && (
+          <div className="mb-4">
+            <p className="text-gray-600">Price: ${venue.price}</p>
+            <p className="text-gray-600">
+              Last Updated:{" "}
+              {new Date(venue.updated).toLocaleDateString(undefined, { weekday: "long", year: "numeric", month: "numeric", day: "numeric" })}
+            </p>
+          </div>
+
+          <div className="mb-4">
+            <p className="text-gray-600">Select Dates:</p>
+            <div className="flex">
+              <div className="mr-2">
+                <p className="text-gray-600">Check-in:</p>
+                <DatePicker
+                  selected={startDate}
+                  onChange={handleStartDateChange}
+                  selectsStart
+                  startDate={startDate}
+                  endDate={endDate}
+                  minDate={new Date()}
+                  filterDate={isDateAvailable}
+                  dateFormat="yyyy-MM-dd"
+                  isClearable
+                  className="border-2 border-grey-500 rounded"
+                />
+              </div>
+              <div>
+                <p className="text-gray-600">Check-out:</p>
+                <DatePicker
+                  selected={endDate}
+                  onChange={handleEndDateChange}
+                  selectsEnd
+                  startDate={startDate}
+                  endDate={endDate}
+                  minDate={startDate}
+                  filterDate={isDateAvailable}
+                  dateFormat="yyyy-MM-dd"
+                  isClearable
+                  className="border-2 border-grey-500 rounded"
+                />
+              </div>
+            </div>
+
+            {startDate && endDate && !isDateAvailable(startDate) && !isDateAvailable(endDate) && (
+              <p className="text-red-500">The selected dates are not available.</p>
+            )}
+
             <div className="mt-4">
-              <p className="text-gray-600">
-                Selected Dates: {startDate.toDateString()} - {endDate.toDateString()}
-              </p>
-              <p className="text-gray-600">Number of Days: {calculateNumberOfDays(startDate, endDate)}</p>
-              <p className="text-gray-600">Total Price: ${calculateTotalPrice(startDate, endDate)}</p>
-              <p className="text-gray-600">Number of Guests: {guests}</p>
+              <label className="text-gray-600">Guests:</label>
+              <input type="number" value={guests} min={1} onChange={handleGuestsChange} className="border-2 border-gray-500 rounded px-2 py-1 ml-2" />
             </div>
-          )}
 
-          <button
-            onClick={handleBookClick}
-            disabled={!startDate || !endDate || !isDateAvailable(startDate) || !isDateAvailable(endDate)}
-            className="bg-blue-500 text-white py-2 px-4 rounded mt-4"
-          >
-            Book Now
-          </button>
+            {startDate && endDate && isDateAvailable(startDate) && isDateAvailable(endDate) && (
+              <div className="mt-4">
+                <p className="text-gray-600">
+                  Selected Dates: {startDate.toDateString()} - {endDate.toDateString()}
+                </p>
+                <p className="text-gray-600">Number of Days: {calculateNumberOfDays(startDate, endDate)}</p>
+                <p className="text-gray-600">Total Price: ${calculateTotalPrice(startDate, endDate)}</p>
+                <p className="text-gray-600">Number of Guests: {guests}</p>
+              </div>
+            )}
+
+            <button
+              onClick={handleBookClick}
+              disabled={!startDate || !endDate || !isDateAvailable(startDate) || !isDateAvailable(endDate)}
+              className="bg-blue-500 text-white py-2 px-4 rounded mt-4"
+            >
+              Book Now
+            </button>
+          </div>
+          <div className="flex mt-4">
+            <div className="flex items-center my-4">
+              {venue.meta.wifi ? <FaCheck className="text-green-500 mr-1" /> : <FaTimes className="text-red-500 line-through mr-1" />}
+              <p className="text-gray-600">WiFi</p>
+            </div>
+            <div className="flex items-center mr-4">
+              {venue.meta.parking ? <FaCheck className="text-green-500 mr-1" /> : <FaTimes className="text-red-500 line-through mr-1" />}
+              <p className="text-gray-600">Parking</p>
+            </div>
+            <div className="flex items-center mr-4">
+              {venue.meta.breakfast ? <FaCheck className="text-green-500 mr-1" /> : <FaTimes className="text-red-500 line-through mr-1" />}
+              <p className="text-gray-600">Breakfast</p>
+            </div>
+            <div className="flex items-center mr-4">
+              {venue.meta.pets ? <FaCheck className="text-green-500 mr-1" /> : <FaTimes className="text-red-500 line-through mr-1" />}
+              <p className="text-gray-600">Pets</p>
+            </div>
+          </div>
         </div>
-        <div className="flex mt-4">
-          <div className="flex items-center mr-4">
-            {venue.meta.wifi ? <FaCheck className="text-green-500 mr-1" /> : <FaTimes className="text-red-500 line-through mr-1" />}
-            <p className="text-gray-600">WiFi</p>
-          </div>
-          <div className="flex items-center mr-4">
-            {venue.meta.parking ? <FaCheck className="text-green-500 mr-1" /> : <FaTimes className="text-red-500 line-through mr-1" />}
-            <p className="text-gray-600">Parking</p>
-          </div>
-          <div className="flex items-center mr-4">
-            {venue.meta.breakfast ? <FaCheck className="text-green-500 mr-1" /> : <FaTimes className="text-red-500 line-through mr-1" />}
-            <p className="text-gray-600">Breakfast</p>
-          </div>
-          <div className="flex items-center mr-4">
-            {venue.meta.pets ? <FaCheck className="text-green-500 mr-1" /> : <FaTimes className="text-red-500 line-through mr-1" />}
-            <p className="text-gray-600">Pets</p>
-          </div>
-        </div>
-      </div>
-      <div className="w-[400px] h-[20rem]">
-        <MediaGallery media={venue.media} />
       </div>
     </div>
   );

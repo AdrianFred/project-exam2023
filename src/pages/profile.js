@@ -131,7 +131,13 @@ const Profile = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block font-medium mb-2">Avatar URL:</label>
-            <input required type="text" value={avatar} onChange={handleAvatarChange} className="border border-gray-300 px-4 py-2 w-full rounded" />
+            <input
+              required
+              type="text"
+              placeholder={userInfo.avatar}
+              onChange={handleAvatarChange}
+              className="border border-gray-300 px-4 py-2 w-full rounded"
+            />
           </div>
           <div className="mb-4">
             <label className="block font-medium mb-2">Venue Manager:</label>
