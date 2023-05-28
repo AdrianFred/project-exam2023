@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LoginUrl } from "../apiUrl/shared";
 
 /**
  * Custom hook for handling login functionality.
@@ -22,7 +23,7 @@ function useLogin() {
     setLoginError(null);
 
     try {
-      const response = await fetch("https://api.noroff.dev/api/v1/holidaze/auth/login", {
+      const response = await fetch(LoginUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

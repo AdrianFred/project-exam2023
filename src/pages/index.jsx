@@ -3,9 +3,10 @@ import { FaHotel } from "react-icons/fa";
 import { useState } from "react";
 import { filterResults } from "@/components/tools/SearchFilter";
 import Head from "next/head";
+import { VenueUrl } from "@/components/apiUrl/shared";
 
 export async function getServerSideProps() {
-  const res = await fetch("https://api.noroff.dev/api/v1/holidaze/venues?sort=created&sortOrder=desc&limit=100");
+  const res = await fetch(VenueUrl + "?sort=created&sortOrder=desc&limit=100");
   const data = await res.json();
   return {
     props: {

@@ -1,3 +1,10 @@
+/**
+ * Filter the search results based on a search term.
+ * @param {string} searchTerm - The term to search for.
+ * @param {Object} data - The data containing the search results.
+ * @param {Array} data.results - The array of results to filter.
+ * @returns {Array} - The filtered results.
+ */
 export function filterResults(searchTerm, { results }) {
   const filteredResults = [];
   results.map((result) => {
