@@ -1,21 +1,33 @@
-# Project Title
-
-Holidaze Venue booker
+# Holidaze Venue Booker
 
 ## Description
 
 This is our exam project to make a fully function website in React/Nextjs for a "company" called Holidaze. The website is a venue booker for hotels, guesthouses and B&B's. The website is made with React/Nextjs, Tailwindcss and their provided API.
+
+I started out making this website in a figma design file with a style guide. I then changed stuff throught the project to make it more user friendly and better looking. The provided API was used to get the data for the venues and the bookings. Creating users and authenticating users was also done through the API.
+There was also an "admin" page of this website, where you could manage the venues you managed. You could also see the bookings for the venues you managed.
 
 ## Getting Started
 
 - Clone the repo
 - Run `npm install` to install dependencies
 - Run `npm run dev` to start the development server
-- Enjoy
+- Open in browser at `http://localhost:3000` or whatever it says in the console.
+- Enjoy the testing!
 
 ## Features
 
 The features of this website is to be able to search for a venue, see the details of the venue, book the venue and see the booking in the admin panel. Its also fast and responsive for both desktop and mobile users. SEO friendly is also a point to mention.
+
+List:
+
+- Search for a venue
+- See the details of the venue
+- Book the venue
+- See the booking in your profile.
+- Admin panel to manage your venues and see the bookings for your venues.
+- Fast and responsive
+- SEO friendly
 
 ## Dependencies
 
