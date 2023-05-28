@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import VenueDetails from "@/components/VenueDetails";
+import Head from "next/head";
 
 export async function getServerSideProps({ query }) {
   const { slug } = query;
@@ -14,10 +15,16 @@ export async function getServerSideProps({ query }) {
 }
 
 export default function Venue({ data }) {
-  console.log(data);
   return (
-    <div className="flex justify-center my-24">
-      <VenueDetails venue={data} bookings={data.bookings} />
-    </div>
+    <>
+      <Head>
+        <title>Holidaze | {data.name}</title>
+        <meta name="description" content={data.description} />
+      </Head>
+
+      <div className="flex justify-center my-24">
+        <VenueDetails venue={data} bookings={data.bookings} />
+      </div>
+    </>
   );
 }
