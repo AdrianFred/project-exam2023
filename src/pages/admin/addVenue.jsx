@@ -87,7 +87,7 @@ export default function AddVenue() {
         <h1 className="text-2xl font-bold mb-4">Add a new Venue</h1>
         <form onSubmit={handleSubmit} className="max-w-md mx-auto">
           <div className="mb-4">
-            <label className="block mb-1 font-medium">Name</label>
+            <label className="block mb-1 font-medium">Name*</label>
             <input
               required
               type="text"
@@ -98,7 +98,7 @@ export default function AddVenue() {
             />
           </div>
           <div className="mb-4">
-            <label className="block mb-1 font-medium">Description</label>
+            <label className="block mb-1 font-medium">Description*</label>
             <textarea
               required
               name="description"
@@ -108,7 +108,7 @@ export default function AddVenue() {
             ></textarea>
           </div>
           <div className="mb-4">
-            <label className="block mb-1 font-medium">Media</label>
+            <label className="block mb-1 font-medium">Media*</label>
             <textarea
               required
               placeholder="Add more with comma"
@@ -119,11 +119,11 @@ export default function AddVenue() {
             />
           </div>
           <div className="mb-4">
-            <label className="block mb-1 font-medium">Price</label>
+            <label className="block mb-1 font-medium">Price*</label>
             <input required type="number" name="price" onChange={handleChange} className="border border-gray-300 px-4 py-2 w-full rounded" />
           </div>
           <div className="mb-4">
-            <label className="block mb-1 font-medium">Max Guests</label>
+            <label className="block mb-1 font-medium">Max Guests*</label>
             <input
               required
               min={1}
@@ -135,7 +135,7 @@ export default function AddVenue() {
             />
           </div>
           <div className="mb-4">
-            <label className="block mb-1 font-medium">Rating</label>
+            <label className="block mb-1 font-medium">Rating*</label>
             <input
               required
               min={0}
