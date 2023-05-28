@@ -1,20 +1,23 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { RiMenuLine, RiCloseLine } from "react-icons/ri";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const router = useRouter();
+  const [venueManager, setVenueManager] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const role = localStorage.getItem("venueManager");
 
     if (token) {
       setIsLoggedIn(true);
+    }
+
+    if (role === "true") {
+      setVenueManager(true);
     }
   }, []);
 
@@ -28,19 +31,13 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("venueManager");
     setIsLoggedIn(false);
+    toast.success("Logged out successfully!");
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
   return (
-    <nav className="bg-gray-900 py-4">
+    <nav className="fixed top-0 left-0 w-full bg-gray-900 py-4 z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
@@ -62,11 +59,13 @@ const Navbar = () => {
                   Home
                 </Link>
               </li>
-              <li>
-                <Link href="/Venues" className="text-white hover:text-gray-300 px-4 py-2">
-                  Venues
-                </Link>
-              </li>
+              {venueManager && (
+                <li>
+                  <Link href="/admin" className="text-white hover:text-gray-300 px-4 py-2">
+                    Manage Venues
+                  </Link>
+                </li>
+              )}
               {isLoggedIn ? (
                 <>
                   <li>
@@ -75,7 +74,7 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/" className="text-white hover:text-gray-300 px-4 py-2" onClick={handleLogout}>
+                    <Link href="/" className="text-red-500 hover:text-gray-300 px-4 py-2" onClick={handleLogout}>
                       Logout
                     </Link>
                   </li>
@@ -95,15 +94,17 @@ const Navbar = () => {
           <div className="absolute top-full left-0 w-full bg-gray-900">
             <ul className="sm:flex sm:space-x-4 sm:justify-center py-2">
               <li>
-                <Link href="#" className="text-white hover:text-gray-300 px-4 py-2 block text-center" onClick={closeMenu}>
+                <Link href="/" className="text-white hover:text-gray-300 px-4 py-2 block text-center" onClick={closeMenu}>
                   Home
                 </Link>
               </li>
-              <li>
-                <Link href="#" className="text-white hover:text-gray-300 px-4 py-2 block text-center" onClick={closeMenu}>
-                  Venues
-                </Link>
-              </li>
+              {venueManager && (
+                <li>
+                  <Link href="/admin" className="text-white hover:text-gray-300 px-4 py-2 block text-center" onClick={closeMenu}>
+                    Manage Venues
+                  </Link>
+                </li>
+              )}
               {isLoggedIn ? (
                 <>
                   <li>
@@ -112,16 +113,16 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/" className="text-white hover:text-gray-300 px-4 py-2 block text-center" onClick={handleLogout}>
+                    <Link href="/" className="text-red-500 hover:text-gray-300 px-4 py-2 block text-center" onClick={handleLogout}>
                       Logout
                     </Link>
                   </li>
                 </>
               ) : (
                 <li>
-                  <a href="/login" className="text-white hover:text-gray-300 px-4 py-2 block text-center" onClick={closeMenu}>
+                  <Link href="/login" className="text-white hover:text-gray-300 px-4 py-2 block text-center" onClick={closeMenu}>
                     Login/Register
-                  </a>
+                  </Link>
                 </li>
               )}
             </ul>

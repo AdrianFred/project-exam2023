@@ -1,6 +1,19 @@
 import { useState } from "react";
 
+/**
+ * Custom hook for handling login functionality.
+ * @returns {Object} An object containing login function, loading state, and error state.
+ */
+
 function useLogin() {
+  /**
+   * Function for logging in with provided email and password.
+   * @param {string} email - The user's email address.
+   * @param {string} password - The user's password.
+   * @returns {Object} The response data after a successful login.
+   * @throws {Error} If login fails, an error is thrown with the corresponding error message.
+   */
+
   const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState(null);
 
