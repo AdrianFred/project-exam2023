@@ -5,7 +5,7 @@ import { filterResults } from "@/components/tools/SearchFilter";
 import Head from "next/head";
 
 export async function getServerSideProps() {
-  const res = await fetch("https://api.noroff.dev/api/v1/holidaze/venues");
+  const res = await fetch("https://api.noroff.dev/api/v1/holidaze/venues?sort=created&sortOrder=desc&limit=100");
   const data = await res.json();
   return {
     props: {
@@ -46,7 +46,7 @@ export default function Home({ results }) {
         <title>Holidaze | Home</title>
         <meta name="index of holidaze venue booking." content="Holidaze is a hotel booking website for venues all over the world." />
       </Head>
-      <div className="max-w- mx-auto mt-8 p-4">
+      <div className="max-w- mx-auto mt-24 mb-8 p-4">
         <div className="flex justify-center">
           <div className="flex mb-4 max-w-[800px]">
             <input type="text" onChange={searchInput} placeholder="Search venues" className="border border-gray-300 px-4 py-2 w-full rounded" />
@@ -61,20 +61,20 @@ export default function Home({ results }) {
           {currentVenues.length > 0 ? currentVenues.map((venue) => <Cards venue={venue} key={venue.id} />) : <p>No venues available.</p>}
         </div>
         {search.length > venuesPerPage && (
-          <div className="flex justify-center mt-4">
+          <div className="flex justify-center items-center mt-8">
             <button
               onClick={previousPage}
-              className={`bg-blue-500 text-white py-2 px-4 rounded mr-2 ${isFirstPage ? "opacity-50 cursor-not-allowed" : ""}`}
+              className={`bg-blue-500 text-white py-2 px-4 rounded w-24 ${isFirstPage ? "opacity-50 cursor-not-allowed" : ""}`}
               disabled={isFirstPage}
             >
               Previous
             </button>
-            <p className="text-gray-600 mx-2">
+            <p className="text-gray-600 mx-6">
               Page {currentPage} of {Math.ceil(search.length / venuesPerPage)}
             </p>
             <button
               onClick={nextPage}
-              className={`bg-blue-500 text-white py-2 px-4 rounded ${isLastPage ? "opacity-50 cursor-not-allowed" : ""}`}
+              className={`bg-blue-500 text-white py-2 px-4 rounded w-24 ${isLastPage ? "opacity-50 cursor-not-allowed" : ""}`}
               disabled={isLastPage}
             >
               Next

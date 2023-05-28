@@ -170,8 +170,8 @@ const VenueDetails = ({ venue, bookings }) => {
               Book Now
             </button>
           </div>
-          <div className="flex mt-4">
-            <div className="flex items-center my-4">
+          <div className="flex my-4">
+            <div className="flex items-center mr-4">
               {venue.meta.wifi ? <FaCheck className="text-green-500 mr-1" /> : <FaTimes className="text-red-500 line-through mr-1" />}
               <p className="text-gray-600">WiFi</p>
             </div>
