@@ -105,7 +105,7 @@ export default function AddVenue({ results }) {
         <h1 className="text-2xl font-bold mb-4">Edit your Venue</h1>
         <form onSubmit={handleSubmit} className="max-w-md mx-auto">
           <div className="mb-4">
-            <label className="block mb-1 font-medium">Name</label>
+            <label className="block mb-1 font-medium">Name*</label>
             <input
               required
               type="text"
@@ -116,7 +116,7 @@ export default function AddVenue({ results }) {
             />
           </div>
           <div className="mb-4">
-            <label className="block mb-1 font-medium">Description</label>
+            <label className="block mb-1 font-medium">Description*</label>
             <textarea
               required
               name="description"
@@ -126,7 +126,7 @@ export default function AddVenue({ results }) {
             ></textarea>
           </div>
           <div className="mb-4">
-            <label className="block mb-1 font-medium">Media</label>
+            <label className="block mb-1 font-medium">Media*</label>
             <textarea
               required
               placeholder="Add more with comma"
@@ -137,7 +137,7 @@ export default function AddVenue({ results }) {
             />
           </div>
           <div className="mb-4">
-            <label className="block mb-1 font-medium">Price</label>
+            <label className="block mb-1 font-medium">Price*</label>
             <input
               value={form.price}
               required
@@ -148,7 +148,7 @@ export default function AddVenue({ results }) {
             />
           </div>
           <div className="mb-4">
-            <label className="block mb-1 font-medium">Max Guests</label>
+            <label className="block mb-1 font-medium">Max Guests*</label>
             <input
               required
               value={form.maxGuests}
@@ -161,7 +161,7 @@ export default function AddVenue({ results }) {
             />
           </div>
           <div className="mb-4">
-            <label className="block mb-1 font-medium">Rating</label>
+            <label className="block mb-1 font-medium">Rating*</label>
             <input
               value={form.rating}
               required
