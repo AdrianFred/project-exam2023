@@ -2,10 +2,11 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { VenueUrl } from "@/components/apiUrl/shared";
 
 export async function getServerSideProps({ query }) {
   const { slug } = query;
-  const res = await fetch(`https://api.noroff.dev/api/v1/holidaze/venues/${slug}?_bookings=true`);
+  const res = await fetch(VenueUrl + `/${slug}?_bookings=true`);
   const data = await res.json();
   return {
     props: {
@@ -72,7 +73,7 @@ export default function AddVenue({ results }) {
     e.preventDefault();
 
     async function editVenue() {
-      const res = await fetch(`https://api.noroff.dev/api/v1/holidaze/venues/${results.id}`, {
+      const res = await fetch(VenueUrl + `/${results.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

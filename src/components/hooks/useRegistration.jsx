@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
+import { RegisterUrl } from "../apiUrl/shared";
 
 const useRegistration = () => {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -12,7 +13,7 @@ const useRegistration = () => {
     setRegistrationError(null);
 
     try {
-      const response = await fetch("https://api.noroff.dev/api/v1/holidaze/auth/register", {
+      const response = await fetch(RegisterUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

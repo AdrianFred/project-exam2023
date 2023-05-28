@@ -5,13 +5,26 @@ import { FaStar, FaCheck, FaTimes } from "react-icons/fa";
 import MediaGallery from "./MediaGallery";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
+import { BookingUrl } from "./apiUrl/shared";
 
+/**
+ * Component for displaying details of a venue and allowing users to book.
+ * @param {Object} props - The component props.
+ * @param {Object} props.venue - The venue object containing details.
+ * @param {Array} props.bookings - The array of existing bookings.
+ * @returns {JSX.Element} - The rendered component.
+ */
 const VenueDetails = ({ venue, bookings }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [guests, setGuests] = useState();
   const router = useRouter();
 
+  /**
+   * Check if a date is available for booking.
+   * @param {Date} date - The date to check.
+   * @returns {boolean} - True if the date is available, false otherwise.
+   */
   const isDateAvailable = (date) => {
     const isAvailable = !bookings.some((booking) => {
       const bookingDateFrom = new Date(booking.dateFrom);
@@ -21,6 +34,10 @@ const VenueDetails = ({ venue, bookings }) => {
     return isAvailable;
   };
 
+  /**
+   * Handle the change of the start date.
+   * @param {Date} date - The selected start date.
+   */
   const handleStartDateChange = (date) => {
     setStartDate(date);
     if (endDate && date > endDate) {
@@ -28,10 +45,18 @@ const VenueDetails = ({ venue, bookings }) => {
     }
   };
 
+  /**
+   * Handle the change of the end date.
+   * @param {Date} date - The selected end date.
+   */
   const handleEndDateChange = (date) => {
     setEndDate(date);
   };
 
+  /**
+   * Handle the change of the number of guests.
+   * @param {Object} event - The input change event.
+   */
   const handleGuestsChange = (event) => {
     const updatedGuests = parseInt(event.target.value);
     if (updatedGuests <= venue.maxGuests) {
@@ -39,10 +64,13 @@ const VenueDetails = ({ venue, bookings }) => {
     }
   };
 
+  /**
+   * Handle the book button click event.
+   */
   async function handleBookClick() {
     // Make API call to book the selected dates
     if (startDate && endDate && guests > 0) {
-      const res = await fetch("https://api.noroff.dev/api/v1/holidaze/bookings", {
+      const res = await fetch(BookingUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,12 +94,24 @@ const VenueDetails = ({ venue, bookings }) => {
     }
   }
 
+  /**
+   * Calculate the number of days between two dates.
+   * @param {Date} start - The start date.
+   * @param {Date} end - The end date.
+   * @returns {number} - The number of days.
+   */
   const calculateNumberOfDays = (start, end) => {
     const oneDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
     const diffDays = Math.round(Math.abs((end - start) / oneDay));
     return diffDays + 1; // Add 1 to include both start and end dates
   };
 
+  /**
+   * Calculate the total price based on the selected dates.
+   * @param {Date} start - The start date.
+   * @param {Date} end - The end date.
+   * @returns {number} - The total price.
+   */
   const calculateTotalPrice = (start, end) => {
     const numberOfDays = calculateNumberOfDays(start, end);
     return numberOfDays * venue.price;
@@ -146,7 +186,7 @@ const VenueDetails = ({ venue, bookings }) => {
               <p className="text-red-500">The selected dates are not available.</p>
             )}
 
-            <div className="mt-4">
+            <div className="mt-4 grid">
               <label className="text-gray-600">Guests:</label>
               <input
                 required
@@ -154,7 +194,7 @@ const VenueDetails = ({ venue, bookings }) => {
                 min={1}
                 max={venue.maxGuests}
                 onChange={handleGuestsChange}
-                className="border-2 border-gray-500 rounded px-2 py-1 ml-2"
+                className="border-2 border-gray-500 rounded px-2 py-1 ml-2 w-52"
               />
             </div>
 
