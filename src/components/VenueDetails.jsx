@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 const VenueDetails = ({ venue, bookings }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [guests, setGuests] = useState(1);
+  const [guests, setGuests] = useState();
   const router = useRouter();
 
   const isDateAvailable = (date) => {
@@ -41,7 +41,7 @@ const VenueDetails = ({ venue, bookings }) => {
 
   async function handleBookClick() {
     // Make API call to book the selected dates
-    if (startDate && endDate) {
+    if (startDate && endDate && guests > 0) {
       const res = await fetch("https://api.noroff.dev/api/v1/holidaze/bookings", {
         method: "POST",
         headers: {
@@ -62,7 +62,7 @@ const VenueDetails = ({ venue, bookings }) => {
         router.push("/profile");
       }
     } else {
-      toast.error(data.status);
+      toast.error("Please select a valid date range and number of guests.");
     }
   }
 
@@ -148,7 +148,14 @@ const VenueDetails = ({ venue, bookings }) => {
 
             <div className="mt-4">
               <label className="text-gray-600">Guests:</label>
-              <input type="number" value={guests} min={1} onChange={handleGuestsChange} className="border-2 border-gray-500 rounded px-2 py-1 ml-2" />
+              <input
+                required
+                type="number"
+                min={1}
+                max={venue.maxGuests}
+                onChange={handleGuestsChange}
+                className="border-2 border-gray-500 rounded px-2 py-1 ml-2"
+              />
             </div>
 
             {startDate && endDate && isDateAvailable(startDate) && isDateAvailable(endDate) && (
@@ -164,7 +171,7 @@ const VenueDetails = ({ venue, bookings }) => {
 
             <button
               onClick={handleBookClick}
-              disabled={!startDate || !endDate || !isDateAvailable(startDate) || !isDateAvailable(endDate)}
+              disabled={!startDate || !endDate || !isDateAvailable(startDate) || (!isDateAvailable(endDate) && guests < 1)}
               className="bg-blue-500 text-white py-2 px-4 rounded mt-4"
             >
               Book Now

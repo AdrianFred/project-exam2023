@@ -61,11 +61,6 @@ const Navbar = () => {
                   Home
                 </Link>
               </li>
-              <li>
-                <Link href="/Venues" className="text-white hover:text-gray-300 px-4 py-2">
-                  Venues
-                </Link>
-              </li>
               {venueManager && (
                 <li>
                   <Link href="/admin" className="text-white hover:text-gray-300 px-4 py-2">
@@ -105,11 +100,13 @@ const Navbar = () => {
                   Home
                 </Link>
               </li>
-              <li>
-                <Link href="#" className="text-white hover:text-gray-300 px-4 py-2 block text-center" onClick={closeMenu}>
-                  Venues
-                </Link>
-              </li>
+              {venueManager && (
+                <li>
+                  <Link href="/admin" className="text-white hover:text-gray-300 px-4 py-2 block text-center" onClick={closeMenu}>
+                    Manage Venues
+                  </Link>
+                </li>
+              )}
               {isLoggedIn ? (
                 <>
                   <li>

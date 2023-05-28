@@ -1,26 +1,39 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
-export default function AddVenue() {
+export async function getServerSideProps({ query }) {
+  const { slug } = query;
+  const res = await fetch(`https://api.noroff.dev/api/v1/holidaze/venues/${slug}?_bookings=true`);
+  const data = await res.json();
+  return {
+    props: {
+      results: data,
+    },
+  };
+}
+
+export default function AddVenue({ results }) {
+  const router = useRouter();
   const [form, setForm] = useState({
-    name: "",
-    description: "",
-    media: [],
-    price: 0,
-    maxGuests: 0,
-    rating: 0,
+    name: results.name,
+    description: results.description,
+    media: results.media,
+    price: results.price,
+    maxGuests: results.maxGuests,
+    rating: results.rating,
     meta: {
-      wifi: true,
-      parking: true,
-      breakfast: true,
-      pets: true,
+      wifi: results.meta.wifi,
+      parking: results.meta.parking,
+      breakfast: results.meta.breakfast,
+      pets: results.meta.pets,
     },
     location: {
-      address: "",
-      city: "",
-      zip: "",
-      country: "",
-      continent: "",
+      address: results.location.address,
+      city: results.location.city,
+      zip: results.location.zip,
+      country: results.location.country,
+      continent: results.location.continent,
       lat: 0,
       lng: 0,
     },
@@ -57,9 +70,9 @@ export default function AddVenue() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    async function addVenue() {
-      const res = await fetch("https://api.noroff.dev/api/v1/holidaze/venues", {
-        method: "POST",
+    async function editVenue() {
+      const res = await fetch(`https://api.noroff.dev/api/v1/holidaze/venues/${results.id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -68,17 +81,20 @@ export default function AddVenue() {
       });
       const data = await res.json();
       if (data.created) {
-        toast.success("Venue added successfully");
+        toast.success("Venue edited successfully");
+        setTimeout(() => {
+          router.push("/admin/myVenues");
+        }, 2000);
       } else {
         toast.error("Something went wrong");
       }
     }
-    addVenue();
+    editVenue();
   };
 
   return (
-    <div className="container mx-auto p-4 mt-24">
-      <h1 className="text-2xl font-bold mb-4">Add a new Venue</h1>
+    <div className="container mx-auto p-4 my-24">
+      <h1 className="text-2xl font-bold mb-4">Edit your Venue</h1>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto">
         <div className="mb-4">
           <label className="block mb-1 font-medium">Name</label>
@@ -114,12 +130,20 @@ export default function AddVenue() {
         </div>
         <div className="mb-4">
           <label className="block mb-1 font-medium">Price</label>
-          <input required type="number" name="price" onChange={handleChange} className="border border-gray-300 px-4 py-2 w-full rounded" />
+          <input
+            value={form.price}
+            required
+            type="number"
+            name="price"
+            onChange={handleChange}
+            className="border border-gray-300 px-4 py-2 w-full rounded"
+          />
         </div>
         <div className="mb-4">
           <label className="block mb-1 font-medium">Max Guests</label>
           <input
             required
+            value={form.maxGuests}
             min={1}
             max={25}
             type="number"
@@ -131,6 +155,7 @@ export default function AddVenue() {
         <div className="mb-4">
           <label className="block mb-1 font-medium">Rating</label>
           <input
+            value={form.rating}
             required
             min={0}
             max={5}
@@ -143,9 +168,9 @@ export default function AddVenue() {
         <div className="mb-4">
           <label className="block mb-1 font-medium">Address</label>
           <input
+            value={form.location.address}
             type="text"
             name="location.address"
-            value={form.location.address}
             onChange={handleChange}
             className="border border-gray-300 px-4 py-2 w-full rounded"
           />
@@ -153,9 +178,9 @@ export default function AddVenue() {
         <div className="mb-4">
           <label className="block mb-1 font-medium">City</label>
           <input
+            value={form.location.city}
             type="text"
             name="location.city"
-            value={form.location.city}
             onChange={handleChange}
             className="border border-gray-300 px-4 py-2 w-full rounded"
           />
@@ -163,9 +188,9 @@ export default function AddVenue() {
         <div className="mb-4">
           <label className="block mb-1 font-medium">ZIP</label>
           <input
+            value={form.location.zip}
             type="text"
             name="location.zip"
-            value={form.location.zip}
             onChange={handleChange}
             className="border border-gray-300 px-4 py-2 w-full rounded"
           />

@@ -17,24 +17,22 @@ export default function Admin() {
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-2xl font-bold mb-4">Admin Page</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="p-4 bg-white rounded shadow">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:flex lg:justify-center">
+        <div className="p-4 bg-white rounded shadow max-w-[400px]">
           <h2 className="text-lg font-semibold mb-2">Manage</h2>
           <p className="text-gray-700">View and manage existing venues, update venue information, and perform other administrative tasks.</p>
 
-          <a className="text-blue-500 font-medium hover:underline mt-4">Go to Manage</a>
+          <Link href="/admin/myVenues" className="text-blue-500 font-medium hover:underline mt-4">
+            Go to Manage
+          </Link>
         </div>
-        <div className="p-4 bg-white rounded shadow">
+        <div className="p-4 bg-white rounded shadow max-w-[400px]">
           <h2 className="text-lg font-semibold mb-2">Add Venues</h2>
           <p className="text-gray-700">Add new venues to the system, including details and availability.</p>
 
-          <a className="text-blue-500 font-medium hover:underline mt-4">Go to Add Venues</a>
-        </div>
-        <div className="p-4 bg-white rounded shadow">
-          <h2 className="text-lg font-semibold mb-2">View Bookings</h2>
-          <p className="text-gray-700">Browse and view bookings made on different venues.</p>
-
-          <a className="text-blue-500 font-medium hover:underline mt-4">Go to View Bookings</a>
+          <Link href="/admin/addVenue" className="text-blue-500 font-medium hover:underline mt-4">
+            Go to Add Venues
+          </Link>
         </div>
       </div>
     </div>

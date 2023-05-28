@@ -106,10 +106,10 @@ const Profile = () => {
   const isLastPage = indexOfLastBooking >= bookings.length;
 
   return (
-    <div>
-      <div className="max-w-2xl mx-auto mt-8 p-4 bg-white rounded shadow-xl">
+    <div className="my-24">
+      <div className="mx-auto mt-8 p-4 bg-white rounded shadow-xl w-[90%] max-w-[600px]">
         <h1 className="text-2xl font-bold mb-4">Profile</h1>
-        <div className="flex mb-4 justify-between items-center">
+        <div className="grid sm:flex sm:justify-between sm:items-center ">
           <div>
             <div className="mb-2">
               <label className="block font-medium">Name:</label>
@@ -149,14 +149,14 @@ const Profile = () => {
           </button>
         </form>
       </div>
-      <div className="max-w-2xl mx-auto mt-8 p-4 bg-white rounded shadow-xl">
+      <div className="max-w-[600px] mx-auto mt-8 p-4 bg-white rounded shadow-xl w-[90%]">
         <div className="mt-8">
           <h2 className="text-lg font-semibold mb-2">Upcoming Bookings</h2>
           <div className="flex justify-center items-center">
             {currentBookings.length > 0 ? (
               <ul className="list-disc list-inside">
                 {currentBookings.map((booking) => (
-                  <li key={booking.id} className="mb-4 flex items-center gap-4 border-b h-48 w-[500px]">
+                  <li key={booking.id} className="mb-4 flex items-center gap-4 border-b h-48">
                     {booking.venue.media.length > 0 && (
                       <img src={booking.venue.media[0]} alt="Venue" className="w-24 h-24 object-cover rounded border-2 mr-4" />
                     )}

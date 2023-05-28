@@ -46,7 +46,7 @@ export default function Home({ results }) {
         <title>Holidaze | Home</title>
         <meta name="index of holidaze venue booking." content="Holidaze is a hotel booking website for venues all over the world." />
       </Head>
-      <div className="max-w- mx-auto mt-24 mb-8 p-4">
+      <div className="max-w- mx-auto my-24 p-4">
         <div className="flex justify-center">
           <div className="flex mb-4 max-w-[800px]">
             <input type="text" onChange={searchInput} placeholder="Search venues" className="border border-gray-300 px-4 py-2 w-full rounded" />
@@ -58,7 +58,11 @@ export default function Home({ results }) {
           <h2 className="text-2xl font-bold">Our Venues</h2>
         </div>
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:max-w-3xl lg:grid-cols-3 lg:max-w-6xl xl:grid-cols-4 xl:max-w-[1450px] mx-auto">
-          {currentVenues.length > 0 ? currentVenues.map((venue) => <Cards venue={venue} key={venue.id} />) : <p>No venues available.</p>}
+          {currentVenues.length > 0 ? (
+            currentVenues.map((venue) => <Cards venue={venue} key={venue.id} />)
+          ) : (
+            <p className="text-gray-500 text-lg flex items-center justify-center h-32">No venues available.</p>
+          )}
         </div>
         {search.length > venuesPerPage && (
           <div className="flex justify-center items-center mt-8">
