@@ -38,8 +38,6 @@ const RegisterForm = () => {
       return;
     }
 
-    // Registration logic goes here
-
     const data = {
       venueManager,
       name,

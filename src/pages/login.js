@@ -71,7 +71,7 @@ const LoginForm = () => {
           {isLoggingIn ? "Logging in..." : "Login"}
         </button>
         <div className="text-gray-900 mt-4 text-center">
-          Don't have an account?{" "}
+          Dont have an account?{" "}
           <Link href="/register" className="text-indigo-500 hover:text-indigo-600">
             Register here
           </Link>

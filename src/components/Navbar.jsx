@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { RiMenuLine, RiCloseLine } from "react-icons/ri";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
@@ -8,7 +7,6 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [venueManager, setVenueManager] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -122,9 +120,9 @@ const Navbar = () => {
                 </>
               ) : (
                 <li>
-                  <a href="/login" className="text-white hover:text-gray-300 px-4 py-2 block text-center" onClick={closeMenu}>
+                  <Link href="/login" className="text-white hover:text-gray-300 px-4 py-2 block text-center" onClick={closeMenu}>
                     Login/Register
-                  </a>
+                  </Link>
                 </li>
               )}
             </ul>
