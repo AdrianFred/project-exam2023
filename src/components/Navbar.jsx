@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { RiMenuLine, RiCloseLine } from "react-icons/ri";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [venueManager, setVenueManager] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -34,6 +36,9 @@ const Navbar = () => {
     localStorage.removeItem("venueManager");
     setIsLoggedIn(false);
     toast.success("Logged out successfully!");
+    setTimeout(() => {
+      router.reload();
+    }, 1500);
   };
 
   return (
