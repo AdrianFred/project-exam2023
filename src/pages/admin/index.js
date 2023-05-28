@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 export default function Admin() {
   const router = useRouter();
-  const [admin, setAdmin] = useState(false);
 
-  // IF localstorage is not true then redirect to login
   useEffect(() => {
     if (localStorage.getItem("venueManager") === "false") {
       router.push("/login");
-      console.log("not logged in");
+      toast.error("You are not authorized to view this page");
+    }
+    if (!localStorage.getItem("token")) {
+      router.push("/login");
     }
   }, []);
 

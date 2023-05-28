@@ -77,7 +77,7 @@ export default function AddVenue() {
   };
 
   return (
-    <div className="container mx-auto p-4 mt-24">
+    <div className="container mx-auto p-4 my-24">
       <h1 className="text-2xl font-bold mb-4">Add a new Venue</h1>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto">
         <div className="mb-4">

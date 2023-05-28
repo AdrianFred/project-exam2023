@@ -14,7 +14,6 @@ export async function getServerSideProps({ query }) {
 }
 
 export default function Venue({ data }) {
-  console.log(data);
   return (
     <div className="flex justify-center my-24">
       <VenueDetails venue={data} bookings={data.bookings} />

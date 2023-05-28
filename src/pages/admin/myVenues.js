@@ -30,7 +30,7 @@ export default function MyVenues() {
         setVenues(data);
         setLoading(false);
       } catch (error) {
-        console.log("Error fetching venues:", error);
+        toast.error("Something went wrong");
         setLoading(false);
       }
     }
@@ -54,7 +54,7 @@ export default function MyVenues() {
         setVenues((prevVenues) => prevVenues.filter((venue) => venue.id !== venueId));
       }
     } catch (error) {
-      console.log("Error deleting venue:", error);
+      toast.error("Something went wrong");
     }
   };
 
