@@ -25,7 +25,7 @@ export default function Admin() {
       </Head>
       <div className="container mx-auto py-8">
         <h1 className="text-2xl font-bold mb-4">Admin Page</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:flex lg:justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:flex lg:justify-center max-w-[1000px] mx-auto">
           <div className="p-4 bg-white rounded shadow max-w-[400px] mx-auto">
             <h2 className="text-lg font-semibold mb-2">Manage</h2>
             <p className="text-gray-700">View and manage existing venues, update venue information, and perform other administrative tasks.</p>
