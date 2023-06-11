@@ -1,5 +1,7 @@
 # Holidaze Venue Booker
 
+![image](/public/Holidaze.png)
+
 ## Description
 
 This is our exam project to make a fully function website in React/Nextjs for a "company" called Holidaze. The website is a venue booker for hotels, guesthouses and B&B's. The website is made with React/Nextjs, Tailwindcss and their provided API.
@@ -10,6 +12,11 @@ There was also an "admin" page of this website, where you could manage the venue
 ## Getting Started
 
 - Clone the repo
+
+```bash
+git clone https://github.com/AdrianFred/project-exam2023.git
+```
+
 - Run `npm install` to install dependencies
 - Run `npm run dev` to start the development server
 - Open in browser at `http://localhost:3000` or whatever it says in the console.
@@ -40,6 +47,10 @@ List:
 - Eslint
 - Prettier
 
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
 ## Sources
 
 - [Nextjs](https://nextjs.org/)
@@ -51,4 +62,4 @@ List:
 
 ## Authors
 
-- [@AdrianFred]
+- [Adrian](https://www.github.com/adrianfred)
