@@ -36,6 +36,10 @@ List:
 - Fast and responsive
 - SEO friendly
 
+## Demo
+
+[Live demo](https://holidaze-adrian.netlify.app/)
+
 ## Dependencies
 
 - React
