@@ -21,7 +21,7 @@ const Cards = (props) => {
               Price: {props.venue.price}
             </div>
             <Link href={`/venue/${props.venue.id}`}>
-              <button className="p-2 pl-5 pr-5 transition-colors duration-700 transform bg-blue-500 hover:bg-indigo-700 text-gray-100 text-lg rounded-lg focus:border-4 border-indigo-300">
+              <button className="p-2 pl-5 pr-5 transition-colors duration-700 transform bg-blue-500 hover:bg-indigo-700 text-gray-100 text-lg rounded-lg border-indigo-300">
                 View Venue
               </button>
             </Link>
